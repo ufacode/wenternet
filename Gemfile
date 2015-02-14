@@ -40,6 +40,7 @@ gem 'aasm' # state machine
 gem 'airbrake' # errbit notifications
 gem 'bootstrap-sass', '~> 3.3' # bootstrap
 gem 'autoprefixer-rails' # css prefixer
+gem 'nprogress-rails' # turbolinks progressbar
 
 group :development, :test do
   gem 'byebug'
@@ -60,9 +61,8 @@ group :production do
 end
 
 group :test, :development do
-  gem "rspec"
-  gem "rspec-rails", "~> 2.0"
-  gem "factory_girl_rails", "~> 4.0"
+  gem "rspec-rails", "~> 3.0"
+  gem "factory_girl_rails"
   gem "capybara"
   gem 'capybara-screenshot'
   gem 'poltergeist'
