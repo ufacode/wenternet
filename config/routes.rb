@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+
   root "main#index"
+
+  namespace :admin do
+    get '/', to: 'dashboard#index'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
