@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'dashboard#index', as: :dashboard
+    resources :categories
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
