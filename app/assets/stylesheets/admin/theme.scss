@@ -1,0 +1,5 @@
+$nprogress-color: #999;
+@import 'nprogress';
+@import 'nprogress-bootstrap';
+#nprogress .bar { height: 10px !important; }
+
