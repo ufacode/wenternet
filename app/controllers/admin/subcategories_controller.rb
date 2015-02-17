@@ -1,5 +1,5 @@
 class Admin::SubcategoriesController < Admin::ApplicationController
-  before_action :set_subcategory, only: [:show, :edit, :update, :destroy]
+  before_action :set_subcategory, only: [:edit, :update, :destroy]
 
   # GET /subcategories
   def index
