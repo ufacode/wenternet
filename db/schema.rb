@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217102125) do
+ActiveRecord::Schema.define(version: 20150217171743) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20150217102125) do
   end
 
   add_index "categories", ["uri"], name: "index_categories_on_uri", using: :btree
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "uri",        limit: 64
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "cities", ["uri"], name: "index_cities_on_uri", using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        limit: 255
