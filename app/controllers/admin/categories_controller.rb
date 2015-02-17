@@ -1,13 +1,9 @@
 class Admin::CategoriesController < Admin::ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:edit, :update, :destroy]
 
   # GET /admin/categories
   def index
     @categories = Category.all
-  end
-
-  # GET /admin/categories/1
-  def show
   end
 
   # GET /admin/categories/new

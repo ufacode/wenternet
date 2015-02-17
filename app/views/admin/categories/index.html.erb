@@ -16,7 +16,6 @@
       <tr>
         <td><%= category.name %></td>
         <td><%= category.uri %></td>
-        <td><%= link_to 'Show', [:admin, category] %></td>
         <td><%= link_to 'Edit', edit_admin_category_path(category) %></td>
         <td><%= link_to 'Destroy', [:admin, category], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
