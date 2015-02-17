@@ -2,36 +2,41 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
 
-  let(:category) { FactoryGirl.create(:category) }
+  let(:category) { create(:category) }
 
   it 'is valid factory for :category' do
-    expect(FactoryGirl.create(:category)).to be_valid
+    expect(category).to be_valid
   end
-  it 'checks empty category name' do
-    category = FactoryGirl.build(:category, name: nil)
+
+  it 'is check empty category name' do
+    category = build(:category, name: nil)
     category.valid?
     expect(category.errors[:name]).to include("can't be blank")
   end
-  it 'checks empty category name' do
-    category = FactoryGirl.build(:category, uri: 's' * 65)
+
+  it 'is check category uri limit with 64 chars' do
+    category = build(:category, name: 's' * 256)
+    category.valid?
+    expect(category.errors[:name]).to include('is too long (maximum is 255 characters)')
+  end
+
+  it 'is check empty category uri' do
+    category = build(:category, uri: nil)
+    category.valid?
+    expect(category.errors[:uri]).to include("can't be blank")
+  end
+
+  it 'is check category uri limit with 64 chars' do
+    category = build(:category, uri: 's' * 65)
     category.valid?
     expect(category.errors[:uri]).to include('is too long (maximum is 64 characters)')
   end
 
-  subject { category }
-
-  it { should respond_to(:name) }
-  it { should respond_to(:uri) }
-  it { should be_valid }
-
-  describe 'when name is empty' do
-    before { category.name = '' }
-    it { should be_invalid }
-  end
-
-  describe 'when uri is empty' do
-    before { category.uri = '' }
-    it { should be_invalid }
+  it 'is check uniq values of category uri' do
+    create(:category, uri: 'cars')
+    category = build(:category, uri: 'cars')
+    category.valid?
+    expect(category.errors[:uri]).to include('has already been taken')
   end
 
 end
