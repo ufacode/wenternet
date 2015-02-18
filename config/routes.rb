@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :categories, except: :show
     resources :subcategories, except: :show
     resources :cities, except: :show
+    resources :users, except: :show
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
