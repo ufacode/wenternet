@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Subcategory, type: :model do
-
   let(:subcategory) { create(:subcategory) }
 
   it 'is valid factory for subcategory' do
@@ -46,5 +45,4 @@ RSpec.describe Subcategory, type: :model do
     subcategory.valid?
     expect(subcategory.errors[:category_id]).to include "can't be blank"
   end
-
 end

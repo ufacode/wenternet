@@ -38,17 +38,18 @@ class Admin::SubcategoriesController < Admin::ApplicationController
   # DELETE /subcategories/1
   def destroy
     @subcategory.destroy
-      redirect_to admin_subcategories_url, notice: 'Subcategory was successfully destroyed.'
+    redirect_to admin_subcategories_url, notice: 'Subcategory was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subcategory
-      @subcategory = Subcategory.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def subcategory_params
-      params.require(:subcategory).permit(:name, :uri, :category_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_subcategory
+    @subcategory = Subcategory.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def subcategory_params
+    params.require(:subcategory).permit(:name, :uri, :category_id)
+  end
 end

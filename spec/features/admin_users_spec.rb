@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'users in admin', :type => :feature do
+describe 'users in admin', type: :feature do
   it 'check users link in menu' do
     visit '/admin'
     expect(page).to have_content 'Users'

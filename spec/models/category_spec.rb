@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-
   let(:category) { create(:category) }
 
   it 'is valid factory for :category' do
@@ -44,5 +43,4 @@ RSpec.describe Category, type: :model do
     create(:subcategory, category: parent_category)
     expect { parent_category.destroy }.to change(Subcategory, :count).by(-1)
   end
-
 end

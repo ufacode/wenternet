@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   it 'is check valid factory for :user' do
     valid_factory = create(:user)
     expect(valid_factory).to be_valid
@@ -41,7 +40,7 @@ RSpec.describe User, type: :model do
   it 'is check user password limit with 5 chars' do
     user = build(:user, password: 's' * 4)
     user.valid?
-    expect(user.errors[:password]).to include("is too short (minimum is 5 characters)")
+    expect(user.errors[:password]).to include('is too short (minimum is 5 characters)')
   end
 
   it "is check user password confirmation doesn't match" do
@@ -49,5 +48,4 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:password_confirmation]).to include("doesn't match Password")
   end
-
 end

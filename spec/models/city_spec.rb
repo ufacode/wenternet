@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe City, type: :model do
-
   let(:city) { create(:city) }
 
   it 'is valid factory for :city' do
@@ -38,5 +37,4 @@ RSpec.describe City, type: :model do
     city.valid?
     expect(city.errors[:uri]).to include('has already been taken')
   end
-
 end

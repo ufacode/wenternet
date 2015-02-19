@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'subcategories in admin', :type => :feature do
+describe 'subcategories in admin', type: :feature do
   it 'check subcategories link in menu' do
     visit '/admin'
     expect(page).to have_content 'Subcategories'

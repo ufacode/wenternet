@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use mysql as the database for Active Record
@@ -22,7 +21,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 
 gem 'devise'
 gem 'omniauth'
@@ -61,12 +59,12 @@ group :production do
 end
 
 group :test, :development do
-  gem "rspec-rails", "~> 3.0"
-  gem "factory_girl_rails"
-  gem "capybara"
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'capybara'
   gem 'capybara-screenshot'
   gem 'poltergeist'
-  gem "database_cleaner"
-  gem "selenium-webdriver"
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  gem 'rubocop', require: false
 end
-
