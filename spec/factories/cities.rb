@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :city do
-    name 'MyString'
-    uri 'MyString'
+    name 'valid_name'
+    uri 'valid_uri'
   end
 end
