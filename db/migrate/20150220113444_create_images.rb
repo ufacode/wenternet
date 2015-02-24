@@ -3,9 +3,8 @@ class CreateImages < ActiveRecord::Migration
     create_table :images do |t|
       t.string :attachment
       t.references :item
-
-      t.timestamps null: false
+      t.timestamps
     end
-    add_foreign_key :images, :items
+    # add_foreign_key :images, :items
   end
 end

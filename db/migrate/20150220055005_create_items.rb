@@ -6,17 +6,16 @@ class CreateItems < ActiveRecord::Migration
       t.text       :content
       t.string     :email
       t.string     :phone
-      t.references :category,    index: true
-      t.references :subcategory, index: true
-      t.references :city,        index: true
-      t.references :user,        index: true
-      t.string     :state,       index: true, limit: 32
-
-      t.timestamps null: false
+      t.string     :state, index: true, limit: 32
+      t.references :category
+      t.references :subcategory
+      t.references :city
+      t.references :user
+      t.timestamps
     end
-    add_foreign_key :items, :categories
-    add_foreign_key :items, :subcategories
-    add_foreign_key :items, :cities
-    add_foreign_key :items, :users
+    # add_foreign_key :items, :categories
+    # add_foreign_key :items, :subcategories
+    # add_foreign_key :items, :cities
+    # add_foreign_key :items, :users
   end
 end

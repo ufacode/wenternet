@@ -4,7 +4,7 @@ class CreateCities < ActiveRecord::Migration
       t.string :name
       t.string :uri, limit: 64, unique: true, index: true
 
-      t.timestamps null: false
+      t.timestamps
     end
   end
 end
