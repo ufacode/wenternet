@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @item.title %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @item.price %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @item.content %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @item.category.name %>
+</p>
+
+<p>
+  <strong>Subcategory:</strong>
+  <%= @item.subcategory.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @item.city.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @item.user %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @item.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @item.phone %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @item.state.capitalize %>
+</p>
+
+<% @item.images.each do |img| %>
+  <%= link_to image_tag(img.attachment.preview.url), img.attachment.url %>
+<% end %>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

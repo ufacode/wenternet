@@ -1,0 +1,49 @@
+<%= form_for(@item, html: { multipart: true }) do |f| %>
+  <%= form_errors @item %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br>
+    <%= collection_select(:item, :category_id, Category.all, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :subcategory_id %><br>
+    <%= collection_select(:item, :subcategory_id, Subcategory.all, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :city_id %><br>
+    <%= collection_select(:item, :city_id, City.all, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.file_field :images, multiple: true, name: 'images[attachment][]' %>
+  </div>
+  <div class="field">
+    <%= f.check_box :state, {}, 'published', 'draft' %> Publish
+  </div>
+  <div class="actions">
+    <%= f.submit 'Save' %>
+  </div>
+<% end %>
