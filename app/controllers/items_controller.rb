@@ -24,11 +24,11 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       unless params[:images].nil?
-        params[:images]['attachment'].each do |attch|
+        params[:images]["attachment"].each do |attch|
           @image = @item.images.create!(attachment: attch)
         end
       end
-      redirect_to @item, notice: 'Item was successfully created.'
+      redirect_to @item, notice: "Item was successfully created."
     else
       render :new
     end
@@ -39,11 +39,11 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       unless params[:images].nil?
         @item.images.delete_all
-        params[:images]['attachment'].each do |attch|
+        params[:images]["attachment"].each do |attch|
           @image = @item.images.create!(attachment: attch)
         end
       end
-      redirect_to @item, notice: 'Item was successfully updated.'
+      redirect_to @item, notice: "Item was successfully updated."
     else
       render :edit
     end
@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   def destroy
     @item.destroy
-    redirect_to items_url, notice: 'Item was successfully destroyed.'
+    redirect_to items_url, notice: "Item was successfully destroyed."
   end
 
   private

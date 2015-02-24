@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20150220113444) do
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "uri",        limit: 64
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "categories", ["uri"], name: "index_categories_on_uri", using: :btree
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20150220113444) do
   create_table "cities", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "uri",        limit: 64
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "cities", ["uri"], name: "index_cities_on_uri", using: :btree
@@ -34,11 +34,9 @@ ActiveRecord::Schema.define(version: 20150220113444) do
   create_table "images", force: :cascade do |t|
     t.string   "attachment", limit: 255
     t.integer  "item_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "images", ["item_id"], name: "fk_rails_b9af74bd6c", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.string   "title",          limit: 255
@@ -46,30 +44,25 @@ ActiveRecord::Schema.define(version: 20150220113444) do
     t.text     "content",        limit: 65535
     t.string   "email",          limit: 255
     t.string   "phone",          limit: 255
+    t.string   "state",          limit: 32
     t.integer  "category_id",    limit: 4
     t.integer  "subcategory_id", limit: 4
     t.integer  "city_id",        limit: 4
     t.integer  "user_id",        limit: 4
-    t.string   "state",          limit: 32
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "items", ["category_id"], name: "index_items_on_category_id", using: :btree
-  add_index "items", ["city_id"], name: "index_items_on_city_id", using: :btree
   add_index "items", ["state"], name: "index_items_on_state", using: :btree
-  add_index "items", ["subcategory_id"], name: "index_items_on_subcategory_id", using: :btree
-  add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "uri",         limit: 64
     t.integer  "category_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
   add_index "subcategories", ["uri"], name: "index_subcategories_on_uri", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -94,13 +87,8 @@ ActiveRecord::Schema.define(version: 20150220113444) do
   end
 
   add_index "users", ["city_id"], name: "index_users_on_city_id", using: :btree
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "images", "items"
-  add_foreign_key "items", "categories"
-  add_foreign_key "items", "cities"
-  add_foreign_key "items", "subcategories"
-  add_foreign_key "items", "users"
-  add_foreign_key "subcategories", "categories"
 end

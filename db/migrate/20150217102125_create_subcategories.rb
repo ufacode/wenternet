@@ -3,10 +3,10 @@ class CreateSubcategories < ActiveRecord::Migration
     create_table :subcategories do |t|
       t.string :name
       t.string :uri, limit: 64, unique: true, index: true
-      t.references :category, index: true
+      t.references :category
 
-      t.timestamps null: false
+      t.timestamps
     end
-    add_foreign_key :subcategories, :categories
+    # add_foreign_key :subcategories, :categories
   end
 end
