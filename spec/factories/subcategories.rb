@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :subcategory do
-    name "valid_name"
-    uri "valid_uri"
-    category
+    name { Faker::Lorem.word }
+    uri { Faker::Lorem.word }
+    association :category, factory: :category
   end
 end

@@ -1,12 +1,12 @@
 FactoryGirl.define do
   factory :item do
-    title "valid_title"
-    price 9.1
-    content "valid_content"
-    subcategory
+    title { Faker::Name.title }
+    price { Faker::Commerce.price }
+    content { Faker::Lorem.sentence(6) }
+    association :subcategory, factory: :subcategory
     category { subcategory.category }
-    city
-    email "valid@email.ru"
-    phone "9871111111"
+    association :city, factory: :city
+    email { Faker::Internet.email }
+    phone { Faker::PhoneNumber.cell_phone }
   end
 end

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :city do
-    name "valid_name"
-    uri "valid_uri"
+    name { Faker::Address.city }
+    uri { Faker::Lorem.word }
   end
 end
