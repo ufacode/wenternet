@@ -5,7 +5,6 @@ RSpec.describe Subcategory, type: :model do
 
   it "is valid factory for subcategory" do
     expect(subcategory).to be_valid
-    expect(subcategory.category.name).to eq "valid_name"
   end
 
   it "is check empty subcategory name" do

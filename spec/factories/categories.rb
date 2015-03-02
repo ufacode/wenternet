@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :category do
-    name "valid_name"
-    uri "valid_uri"
+    name { Faker::Lorem.word }
+    uri { Faker::Lorem.word }
   end
 end

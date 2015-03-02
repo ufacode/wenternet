@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :items
-
-  devise_for :users
   root 'main#index'
+  devise_for :users
+  resources :items
+  resources :search, only: [:index, :create]
 
   namespace :admin do
     get '/', to: 'dashboard#index', as: :dashboard

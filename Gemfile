@@ -39,6 +39,7 @@ gem 'airbrake' # errbit notifications
 gem 'bootstrap-sass', '~> 3.3' # bootstrap
 gem 'autoprefixer-rails' # css prefixer
 gem 'nprogress-rails' # turbolinks progressbar
+gem 'searchlight'
 
 group :development, :test do
   gem 'byebug'
@@ -52,6 +53,7 @@ group :development do
   gem 'sextant'
   gem 'quiet_assets'
   gem 'bullet'
+  gem 'brakeman', :require => false
 end
 
 group :production do
@@ -67,4 +69,5 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'rubocop', require: false
+  gem 'faker'
 end
