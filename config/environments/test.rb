@@ -40,4 +40,14 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  if defined? Faker
+    Faker::Commerce.class_eval do
+      class << self
+        def price(min: 1, max:100_000_000, precision: 2)
+          rand(min..max).round(precision)
+        end
+      end
+    end
+  end
 end

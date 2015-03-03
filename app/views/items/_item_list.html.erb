@@ -1,0 +1,24 @@
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Price</th>
+    <th>Content</th>
+    <th>Email</th>
+    <th>Phone</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= item.title %></td>
+      <td><%= item.price %></td>
+      <td><%= item.content %></td>
+      <td><%= item.email %></td>
+      <td><%= item.phone %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= paginate @items %>

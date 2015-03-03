@@ -1,0 +1,13 @@
+<ul>
+<% @categories.each do |category| %>
+  <li><%= category.name %>
+    <ul>
+      <% category.subcategories.each do |subcat| %>
+        <li><%= subcat.name %></li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>
+</ul>
+
+<%= render 'item_list' %>
