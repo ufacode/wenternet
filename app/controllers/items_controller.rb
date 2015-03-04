@@ -55,6 +55,40 @@ class ItemsController < ApplicationController
     redirect_to items_url, notice: "Item was successfully destroyed."
   end
 
+  # GET /ufa
+  def city
+    @categories = Category.all
+    if all_cities(params[:city_uri])
+      @items = Item.all.by_desc.page params[:page]
+    else
+      city = City.where(uri: params[:city_uri]).first
+      @items = Item.where(city: city).by_desc.page params[:page]
+    end
+  end
+
+  # GET /ufa/auto
+  def category
+    @category = Category.where(uri: params[:category_uri]).first
+    if all_cities(params[:city_uri])
+      @items = Item.where(category: @category).by_desc.page params[:page]
+    else
+      city = City.where(uri: params[:city_uri]).first
+      @items = Item.where(city: city, category: @category).by_desc.page params[:page]
+    end
+  end
+
+  # GET /ufa/auto/sell
+  def subcategory
+    category = Category.where(uri: params[:category_uri]).first
+    subcategory = Subcategory.where(uri: params[:subcategory_uri]).first
+    if all_cities(params[:city_uri])
+      @items = Item.where(category: category, subcategory: subcategory).by_desc.page params[:page]
+    else
+      city = City.where(uri: params[:city_uri]).first
+      @items = Item.where(city: city, category: category, subcategory: subcategory).by_desc.page params[:page]
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -66,5 +100,9 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:title, :price, :content, :category_id, :subcategory_id, :city_id, :user_id,
                                  :email, :phone, :state, images_attributes: [:id, :item_id, :attachment])
+  end
+
+  def all_cities(city_param)
+    city_param.downcase == "all"
   end
 end

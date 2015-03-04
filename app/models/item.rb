@@ -17,6 +17,8 @@ class Item < ActiveRecord::Base
   validates :phone,          presence: true
   # validates :user_id, presence: true
 
+  scope :by_desc, -> { order(created_at: :desc) }
+
   aasm column: :state do
     state :drafted, initial: true
     state :published

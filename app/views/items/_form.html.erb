@@ -41,7 +41,7 @@
     <%= f.file_field :images, multiple: true, name: 'images[attachment][]' %>
   </div>
   <div class="field">
-    <%= f.check_box :state, {}, 'published', 'draft' %> Publish
+    <%= f.check_box :state, {}, 'published', 'drafted' %> Publish
   </div>
   <div class="actions">
     <%= f.submit 'Save' %>
