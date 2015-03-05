@@ -1,31 +1,32 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
+def translite(str)
+  Russian::translit(str).downcase.gsub(/\W+/, '-')
+end
+
+cities = [["Уфа","ufa"], ["Стерлитамак","sterlitamak"], ["Казань","kazan"], ["Москва","moscow"]]
 City.delete_all
-2.times { City.create(name: Faker::Address.city, uri: Faker::Lorem.word) }
+cities.each { |city| City.create(name: city[0], uri: city[1]) }
 cities = City.all
 
+categories = [
+    ["Авто и мото", ["Продажа", "Покупка", "Сервис", "Услуги", "Другое"]],
+    ["Недвижимость", ["Продажа", "Покупка", "Ипотека", "Сервис", "Услуги", "Другое"]],
+    ["Компьютерная техника", ["Продажа", "Покупка", "Сервис", "Услуги", "Другое"]],
+    ["Одежка, обувь, аксессуары", ["Продажа", "Покупка", "Сервис", "Услуги", "Другое"]],
+    ["Работа и образование", ["Поиск работы", "Вакансии", "Курсы и обучение", "Другое"]],
+]
 Category.delete_all
-2.times { Category.create(name: Faker::Lorem.word, uri: Faker::Lorem.word) }
-categories = Category.all
-
 Subcategory.delete_all
-3.times do
-  Subcategory.create(
-      name:     Faker::Lorem.word,
-      uri:      Faker::Lorem.word,
-      category: categories.sample
-  )
+categories.each do |row|
+  print '.'
+  category = Category.create(name: row[0], uri: translite(row[0]))
+  row[1].each{ |subcategory| Subcategory.create(name: subcategory, uri: translite(subcategory), category: category) }
 end
 subcategories = Subcategory.all
 
 Item.delete_all
 2000.times do
+  print '.'
   subcategory = subcategories.sample
   Item.create(
       title:       Faker::Name.title,
@@ -36,5 +37,5 @@ Item.delete_all
       subcategory: subcategory,
       email:       Faker::Internet.email,
       phone:       Faker::PhoneNumber.cell_phone
-  )
+  ).publish!
 end
