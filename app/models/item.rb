@@ -15,9 +15,10 @@ class Item < ActiveRecord::Base
   validates :city_id,        presence: true
   validates :email,          presence: true
   validates :phone,          presence: true
-  # validates :user_id, presence: true
 
-  scope :by_desc, -> { order(created_at: :desc) }
+  scope :newest,         -> { order("created_at DESC") }
+  scope :published,      -> { where(state: :published) }
+  scope :pages,       ->(p) { page(p).per(15) }
 
   aasm column: :state do
     state :drafted, initial: true

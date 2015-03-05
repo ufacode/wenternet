@@ -14,6 +14,7 @@ describe "items list", type: :feature do
     @category = create(:category, name: "Auto", uri: "auto")
     @subcategory = create(:subcategory, name: "Sell", uri: "sell", category: @category)
     @item = create(:item, category: @category, subcategory: @subcategory, city: @city)
+    @item.publish!
   end
 
   it "check items by city" do

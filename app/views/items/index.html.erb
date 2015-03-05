@@ -2,7 +2,9 @@
 
 <h1>Listing Items</h1>
 
-<table>
+<%= link_to 'New Item', new_item_path %>
+
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th>Title</th>
@@ -15,24 +17,23 @@
       <th>Email</th>
       <th>Phone</th>
       <th>Status</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.title %></td>
+        <td><%= link_to item.title, item %></td>
         <td><%= item.price %></td>
         <td><%= item.content %></td>
-        <td><%= item.category.name %></td>
-        <td><%= item.subcategory.name %></td>
-        <td><%= item.city.name %></td>
+        <td><%= link_to item.category.name, category_path(city: item.city, category: item.category) %></td>
+        <td><%= link_to item.subcategory.name, subcategory_path(city: item.city, category: item.category, subcategory: item.subcategory) %></td>
+        <td><%= link_to item.city.name, city_path(item.city) %></td>
         <td><%= item.user %></td>
         <td><%= item.email %></td>
         <td><%= item.phone %></td>
         <td><%= item.state.capitalize %></td>
-        <td><%= link_to 'Show', item %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>
         <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -40,6 +41,4 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Item', new_item_path %>
+<%= paginate @items %>

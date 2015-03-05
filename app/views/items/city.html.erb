@@ -1,13 +1,18 @@
-<ul>
-<% @categories.each do |category| %>
-  <li><%= category.name %>
+<div class="row">
+  <div class="col-lg-9">
+    <%= render 'item_list' %>
+  </div>
+  <div class="col-lg-3">
     <ul>
-      <% category.subcategories.each do |subcat| %>
-        <li><%= subcat.name %></li>
+      <% @categories.each do |category| %>
+        <li><%= category.name %>
+          <ul>
+            <% category.subcategories.each do |subcategory| %>
+              <li><%= subcategory.name %></li>
+            <% end %>
+          </ul>
+        </li>
       <% end %>
     </ul>
-  </li>
-<% end %>
-</ul>
-
-<%= render 'item_list' %>
+  </div>
+</div>

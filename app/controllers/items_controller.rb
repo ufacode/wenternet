@@ -1,25 +1,19 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item,   only: [:show, :edit, :update, :destroy]
+  before_action :set_params, only: [:city, :category, :subcategory]
 
-  # GET /items
   def index
-    @items = Item.all
+    @items = Item.includes(category: :subcategories).includes(:city).pages(params[:page]).all
   end
 
-  # GET /items/1
-  def show
-  end
+  def show; end
 
-  # GET /items/new
   def new
     @item = Item.new
   end
 
-  # GET /items/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /items
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -34,7 +28,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /items/1
   def update
     if @item.update(item_params)
       unless params[:images].nil?
@@ -49,60 +42,49 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /items/1
   def destroy
     @item.destroy
     redirect_to items_url, notice: "Item was successfully destroyed."
   end
 
-  # GET /ufa
   def city
-    @categories = Category.all
-    if all_cities(params[:city_uri])
-      @items = Item.all.by_desc.page params[:page]
-    else
-      city = City.where(uri: params[:city_uri]).first
-      @items = Item.where(city: city).by_desc.page params[:page]
-    end
+    @items = Item.newest.published.pages(params[:page])
+    items_city!
   end
 
-  # GET /ufa/auto
   def category
-    @category = Category.where(uri: params[:category_uri]).first
-    if all_cities(params[:city_uri])
-      @items = Item.where(category: @category).by_desc.page params[:page]
-    else
-      city = City.where(uri: params[:city_uri]).first
-      @items = Item.where(city: city, category: @category).by_desc.page params[:page]
-    end
+    @items = Item.newest.published.pages(params[:page]).where(category: @category)
+    items_city!
   end
 
-  # GET /ufa/auto/sell
   def subcategory
-    category = Category.where(uri: params[:category_uri]).first
-    subcategory = Subcategory.where(uri: params[:subcategory_uri]).first
-    if all_cities(params[:city_uri])
-      @items = Item.where(category: category, subcategory: subcategory).by_desc.page params[:page]
-    else
-      city = City.where(uri: params[:city_uri]).first
-      @items = Item.where(city: city, category: category, subcategory: subcategory).by_desc.page params[:page]
-    end
+    @items = Item.where(category: @category, subcategory: @subcategory).newest.published.pages(params[:page])
+    items_city!
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_item
     @item = Item.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  def set_params
+    @categories  = Category.includes(:subcategories)
+    @city        = City.where(uri: params[:city]).first                   if params[:city]
+    @category    = Category.where(uri: params[:category]).first           if params[:category]
+    @subcategory = Subcategory.where(uri: params[:subcategory]).first     if params[:subcategory]
+  end
+
+  def items_city!
+    @items = @items.where(city: @city) unless all_cities?
+  end
+
   def item_params
     params.require(:item).permit(:title, :price, :content, :category_id, :subcategory_id, :city_id, :user_id,
                                  :email, :phone, :state, images_attributes: [:id, :item_id, :attachment])
   end
 
-  def all_cities(city_param)
-    city_param.downcase == "all"
+  def all_cities?
+    params[:city].downcase == "all"
   end
 end
