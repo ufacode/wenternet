@@ -2,36 +2,49 @@
   <div class="col-lg-12">
     <h2>Поиск по товарам, брэндам и продуктам</h2>
   </div>
-  <form>
-    <div class="col-lg-11">
-      <div class="form-group">
-        <input type="text" name="q" placeholder="BMW 2" class="form-control" />
-      </div>
+  <%= form_tag(controller: 'search', action: 'create', method: 'post') do %>
+    <div class="col-lg-10">
+      <%= text_field_tag('search[query]', nil, class: 'form-control') %>
     </div>
-    <div class="col-lg-1">
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          Везде <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Авто</a></li>
-          <li><a href="#">Недвижимость</a></li>
-          <li><a href="#">Техника</a></li>
-          <li><a href="#">Услуги</a></li>
-        </ul>
-      </div>
+    <div class="col-lg-2">
+      <%= collection_select(:search, :category, @categories, :id, :name, { prompt: "Везде" }, { class: 'form-control' }) %>
     </div>
     <div class="col-lg-12 text-center form-group">
-      <button class="btn btn-success">Искать</button>
+      <%= submit_tag('Искать', class: "btn btn-success") %>
     </div>
-  </form>
+  <% end %>
 </div>
 
 <div class="row">
   <div class="col-lg-8">
-    <h3>Категории и подкатегории</h3>
+    <div class="col-m-12 block">
+      <h3>Категории и подкатегории</h3>
+      <% @categories.each do |category| %>
+        <div class="col-sm-4">
+          <h4><%= link_to category.name, category_path(city: "all", category: category) %></h4>
+          <p>
+            <% category.subcategories.each do |subcat| %>
+              <%= link_to subcat.name, subcategory_path(city: "all", category: category, subcategory: subcat) %>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-m-12 block">
+      <h3>Города</h3>
+      <p>
+        <% @cities.each do |city| %>
+          <%= link_to city.name, city_path(city: city) %>
+        <% end %>
+      </p>
+    </div>
   </div>
   <div class="col-lg-4">
-    <h3>Колонка всяких вкусностей</h3>
+    <h3>Последние объявления</h3>
+    <ul class="list-group">
+      <% @items.each do |item| %>
+        <li class="list-group-item"><%= link_to item.title, item %></li>
+      <% end %>
+    </ul>
   </div>
 </div>
