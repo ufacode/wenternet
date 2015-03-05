@@ -12,10 +12,10 @@ Rails.application.routes.draw do
     resources :users, except: :show
   end
 
-  get "/:city_uri", to: "items#city"
-  get "/:city_uri/:category_uri", to: "items#category"
-  get "/:city_uri/:category_uri/:subcategory_uri", to: "items#subcategory"
-  get "/:city_uri/:category_uri/:subcategory_uri/:id", to: "items#show"
+  get "/:city", to: "items#city", as: :city
+  get "/:city/:category", to: "items#category", as: :category
+  get "/:city/:category/:subcategory", to: "items#subcategory", as: :subcategory
+  get "/:city/:category/:subcategory/:id", to: "items#show"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
