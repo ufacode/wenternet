@@ -48,4 +48,17 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:password_confirmation]).to include("doesn't match Password")
   end
+
+  it "is check unique value of user uid" do
+    create(:user, provider: "twitter", uid: "1")
+    user = build(:user, provider: "twitter", uid: "1")
+    user.valid?
+    expect(user.errors["uid"]).to include("has already been taken")
+  end
+
+  it "is check unique value of user uid only in scope provider" do
+    create(:user, provider: "twitter", uid: "1")
+    user = build(:user, provider: "facebook", uid: "1")
+    expect(user).to be_valid
+  end
 end
