@@ -5,10 +5,8 @@ describe "users in admin", type: :feature do
     visit "/admin"
     expect(page).to have_content "Users"
   end
-  it "check dashboard" do
+  it "check dashboard as unauthorization user" do
     visit admin_users_path
-    expect(page).to have_content "Listing Users"
-    expect(page).to have_content "City"
-    expect(page).not_to have_link "Show"
+    expect(page).to have_content "Log in"
   end
 end

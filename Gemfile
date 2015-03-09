@@ -24,7 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'omniauth'
-# gem 'omniauth-twitter'
+gem 'omniauth-twitter'
 # gem 'omniauth-facebook'
 # gem 'omniauth-linkedin'
 # gem 'omniauth-vkontakte'
@@ -40,6 +40,7 @@ gem 'bootstrap-sass', '~> 3.3' # bootstrap
 gem 'autoprefixer-rails' # css prefixer
 gem 'nprogress-rails' # turbolinks progressbar
 gem 'searchlight'
+gem "rails_config"
 
 group :development, :test do
   gem 'byebug'
