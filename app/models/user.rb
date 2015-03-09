@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:twitter]
+         :omniauthable, omniauth_providers: [:twitter, :facebook]
 
   belongs_to :city
 
@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
       user.name = auth.info.name
       user.provider = auth.provider
       user.uid = auth.uid
-      user.email = "#{auth.uid}@example.com"
+      user.email = auth.info.email || "#{auth.uid}@example.com"
       user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
     end
