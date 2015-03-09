@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
-# gem 'omniauth-facebook'
+gem 'omniauth-facebook'
 # gem 'omniauth-linkedin'
 # gem 'omniauth-vkontakte'
 # gem 'omniauth-github'
