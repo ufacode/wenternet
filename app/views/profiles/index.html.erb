@@ -1,0 +1,10 @@
+<h4>Список пользователей:</h4>
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.name, profile_path(user) %>
+      <%= user.email %>
+    </li>
+  <% end %>
+</ul>
+<%= paginate @users %>

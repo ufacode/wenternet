@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   resources :items
   resources :search, only: [:index, :create]
+  resources :profiles, only: [:index, :show, :edit, :update]
 
   namespace :admin do
     get '/', to: 'dashboard#index', as: :dashboard

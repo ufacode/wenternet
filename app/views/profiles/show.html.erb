@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-lg-8">
+    <h4>Информация пользователя:</h4>
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+    <p>
+      <%= link_to "Edit profile", edit_profile_path(@user) %>
+    </p>
+  </div>
+  <div class="col-lg-4">
+    <h4>Поданные объявления:</h4>
+    <% @user.items.each do |item| %>
+      <%= link_to item.title, item_path %>
+    <% end %>
+  </div>
+</div>
