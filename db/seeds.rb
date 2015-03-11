@@ -24,6 +24,18 @@ categories.each do |row|
 end
 subcategories = Subcategory.all
 
+User.delete_all
+password = "password"
+30.times do
+  User.create(
+      name: Faker::Name.name,
+      email:  Faker::Internet.safe_email,
+      password: password,
+      password_confirmation: password
+  )
+end
+users = User.all
+
 Item.delete_all
 2000.times do
   print '.'
@@ -35,6 +47,7 @@ Item.delete_all
       city:        cities.sample,
       category:    subcategory.category,
       subcategory: subcategory,
+      user:        users.sample,
       email:       Faker::Internet.email,
       phone:       Faker::PhoneNumber.cell_phone
   ).publish!
