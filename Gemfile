@@ -29,6 +29,7 @@ gem 'omniauth-facebook'
 # gem 'omniauth-linkedin'
 # gem 'omniauth-vkontakte'
 # gem 'omniauth-github'
+gem 'cancancan'
 
 gem 'russian' # russian lang
 gem 'kaminari' # paginations
