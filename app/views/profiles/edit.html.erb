@@ -1,0 +1,19 @@
+<%= form_for(@user, url: profile_path(@user), html: { method: :patch }) do |f| %>
+  <%= form_errors @user %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= collection_select(:user, :city_id, City.all, :id, :name, {:include_blank => 'Please Select'}) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

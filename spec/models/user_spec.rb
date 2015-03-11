@@ -61,4 +61,10 @@ RSpec.describe User, type: :model do
     user = build(:user, provider: "facebook", uid: "1")
     expect(user).to be_valid
   end
+
+  it "is check items should be destroyed when user deleted" do
+    user = create(:user)
+    4.times { create(:item, user: user) }
+    expect { user.destroy }.to change(Item, :count).by(-4)
+  end
 end

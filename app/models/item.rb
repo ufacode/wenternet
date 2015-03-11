@@ -13,6 +13,7 @@ class Item < ActiveRecord::Base
   validates :category_id,    presence: true
   validates :subcategory_id, presence: true
   validates :city_id,        presence: true
+  validates :user_id,        presence: true
   validates :email,          presence: true
   validates :phone,          presence: true
 

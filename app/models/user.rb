@@ -4,9 +4,10 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:twitter, :facebook]
 
   belongs_to :city
+  has_many :items, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 255 }
-  validates :uid, uniqueness: { scope: :provider }
+  validates :uid, uniqueness: { scope: :provider }, allow_nil: true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

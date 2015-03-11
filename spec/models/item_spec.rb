@@ -55,6 +55,12 @@ RSpec.describe Item, type: :model do
     expect(item.errors[:city_id]).to include "can't be blank"
   end
 
+  it "is check existence of user" do
+    item = build(:item, user: nil)
+    item.valid?
+    expect(item.errors[:user_id]).to include "can't be blank"
+  end
+
   it "is check empty item email" do
     item = build(:item, email: nil)
     item.valid?

@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    @item.user = current_user
     if @item.save
       unless params[:images].nil?
         params[:images]["attachment"].each do |attch|

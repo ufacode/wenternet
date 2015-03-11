@@ -6,6 +6,7 @@ FactoryGirl.define do
     association :subcategory, factory: :subcategory
     category { subcategory.category }
     association :city, factory: :city
+    association :user, factory: :user
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.cell_phone }
   end
