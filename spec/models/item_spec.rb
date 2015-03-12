@@ -97,4 +97,18 @@ RSpec.describe Item, type: :model do
     item.draft!
     expect(item.state).to eq "drafted"
   end
+
+  it "is check item state after expire when been published" do
+    item = create(:item, state: "published")
+    expect(item).to be_published
+    item.expire!
+    expect(item.state).to eq "expired"
+  end
+
+  it "is check item state after expire when been drafted" do
+    item = create(:item, state: "drafted")
+    expect(item).to be_drafted
+    item.expire!
+    expect(item.state).to eq "expired"
+  end
 end

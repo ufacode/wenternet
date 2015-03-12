@@ -24,6 +24,7 @@ class Item < ActiveRecord::Base
   aasm column: :state do
     state :drafted, initial: true
     state :published
+    state :expired
 
     event :publish do
       transitions from: :drafted, to: :published
@@ -31,6 +32,11 @@ class Item < ActiveRecord::Base
 
     event :draft do
       transitions from: :published, to: :drafted
+    end
+
+    event :expire do
+      transitions from: :published, to: :expired
+      transitions from: :drafted,   to: :expired
     end
   end
 end
