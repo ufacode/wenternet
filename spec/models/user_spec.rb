@@ -2,8 +2,15 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   it "is check valid factory for :user" do
-    valid_factory = create(:user)
-    expect(valid_factory).to be_valid
+    user = create(:user)
+    expect(user).to be_valid
+    expect(user.role).to eq("user")
+  end
+
+  it "is check valid factory for :admin" do
+    admin = create(:admin)
+    expect(admin).to be_valid
+    expect(admin.role).to eq("admin")
   end
 
   it "is check empty user name" do

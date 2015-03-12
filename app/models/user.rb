@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_save :default_role
+
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:twitter, :facebook]
@@ -18,5 +20,11 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
     end
+  end
+
+  private
+
+  def default_role
+    self.role ||= "user"
   end
 end

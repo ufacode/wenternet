@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :city do
     name { Faker::Address.city }
-    uri { Faker::Lorem.word }
+    sequence(:uri) { |i| "city#{i}" }
   end
 end

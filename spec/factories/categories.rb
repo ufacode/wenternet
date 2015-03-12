@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :category do
     name { Faker::Lorem.word }
-    uri { Faker::Lorem.word }
+    sequence(:uri) { |i| "category#{i}" }
   end
 end

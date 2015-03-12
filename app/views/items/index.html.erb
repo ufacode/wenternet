@@ -2,8 +2,9 @@
 
 <h1>Listing Items</h1>
 
-<%= link_to 'New Item', new_item_path %>
-
+<% if can? :new, Item %>
+  <%= link_to 'New Item', new_item_path %>
+<% end %>
 <table class="table table-hover table-striped">
   <thead>
     <tr>
@@ -30,12 +31,16 @@
         <td><%= link_to item.category.name, category_path(city: item.city, category: item.category) %></td>
         <td><%= link_to item.subcategory.name, subcategory_path(city: item.city, category: item.category, subcategory: item.subcategory) %></td>
         <td><%= link_to item.city.name, city_path(item.city) %></td>
-        <td><%= item.user %></td>
+        <td><%= item.user.name %></td>
         <td><%= item.email %></td>
         <td><%= item.phone %></td>
         <td><%= item.state.capitalize %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :edit, item %>
+          <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <% end %>
+        <% if can? :destroy, item %>
+          <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
