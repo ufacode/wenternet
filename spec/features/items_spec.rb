@@ -61,6 +61,8 @@ describe "items pages with", type: :feature do
       expect(page).to have_content("#{item.title}")
       expect(page).to have_link("Back")
       expect(page).not_to have_link("Edit")
+      expect(page).not_to have_link("+")
+      expect(page).not_to have_link("-")
     end
   end
 
@@ -87,6 +89,8 @@ describe "items pages with", type: :feature do
       expect(page).to have_content("#{@user_item.title}")
       expect(page).to have_link("Back")
       expect(page).to have_link("Edit")
+      expect(page).not_to have_link("+")
+      expect(page).not_to have_link("-")
     end
 
     it "is check item show page another user" do
@@ -94,6 +98,8 @@ describe "items pages with", type: :feature do
       expect(page).to have_content("#{@another_user_item.title}")
       expect(page).to have_link("Back")
       expect(page).not_to have_link("Edit")
+      expect(page).to have_link("+")
+      expect(page).to have_link("-")
     end
 
     it "is check item edit page" do
@@ -127,10 +133,19 @@ describe "items pages with", type: :feature do
     end
 
     it "is check item show page" do
+      item = create(:item, user: @admin)
+      visit item_path(item)
+      expect(page).not_to have_link("+")
+      expect(page).not_to have_link("-")
+    end
+
+    it "is check item show page another user" do
       visit item_path(@user_item)
       expect(page).to have_content("#{@user_item.title}")
       expect(page).to have_link("Back")
       expect(page).to have_link("Edit")
+      expect(page).to have_link("+")
+      expect(page).to have_link("-")
     end
 
     it "is check item edit page" do

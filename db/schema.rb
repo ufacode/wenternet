@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311105950) do
+ActiveRecord::Schema.define(version: 20150313085553) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 20150311105950) do
 
   add_index "items", ["state"], name: "index_items_on_state", using: :btree
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "item_id",    limit: 4
+    t.integer  "user_id",    limit: 4
+    t.integer  "voter_id",   limit: 4
+    t.integer  "rating",     limit: 1
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "uri",         limit: 64
@@ -87,6 +96,9 @@ ActiveRecord::Schema.define(version: 20150311105950) do
     t.string   "provider",               limit: 255
     t.string   "uid",                    limit: 255
     t.string   "role",                   limit: 255
+    t.integer  "rating",                 limit: 4
+    t.integer  "rating_plus",            limit: 4
+    t.integer  "rating_minus",           limit: 4
   end
 
   add_index "users", ["city_id"], name: "index_users_on_city_id", using: :btree

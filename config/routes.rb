@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root 'main#index'
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
-  resources :items
+  resources :items do
+    member do
+      post :plus_rating
+      post :minus_rating
+    end
+  end
   resources :search, only: [:index, :create]
   resources :profiles, only: [:index, :show, :edit, :update]
 

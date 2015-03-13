@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<% if can? :vote, @item %>
+  <a class="plus-rating" href="#" data-url=<%= plus_rating_item_path(@item) %>>+</a> <br/>
+  <a class="minus-rating" href="#" data-url=<%= minus_rating_item_path(@item) %>>-</a>
+<% end %>
+
 <p>
   <strong>Title:</strong>
   <%= @item.title %>

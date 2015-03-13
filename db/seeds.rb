@@ -27,12 +27,14 @@ subcategories = Subcategory.all
 User.delete_all
 password = "password"
 30.times do
-  User.create(
+  user = User.new(
       name: Faker::Name.name,
       email:  Faker::Internet.safe_email,
       password: password,
       password_confirmation: password
   )
+  user.skip_confirmation!
+  user.save
 end
 users = User.all
 

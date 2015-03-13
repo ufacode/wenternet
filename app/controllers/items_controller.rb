@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_item,   only: [:show, :edit, :update, :destroy]
+  before_action :set_item,   only: [:show, :edit, :update, :destroy, :plus_rating, :minus_rating]
   before_action :set_params, only: [:city, :category, :subcategory]
 
   def index
@@ -65,6 +65,14 @@ class ItemsController < ApplicationController
     items_city!
   end
 
+  def plus_rating
+    rate!(1)
+  end
+
+  def minus_rating
+    rate!(-1)
+  end
+
   private
 
   def set_item
@@ -89,5 +97,14 @@ class ItemsController < ApplicationController
 
   def all_cities?
     params[:city].downcase == "all"
+  end
+
+  def rate!(rating)
+    if Rating.dublicate?(@item, current_user)
+      @message = "You have already voted"
+    else
+      @item.user.rate!(@item, current_user, rating)
+      @message = "Your vote has been counted"
+    end
   end
 end
