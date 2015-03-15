@@ -22,9 +22,31 @@ class User < ActiveRecord::Base
     end
   end
 
+  def rate!(item, voter, rating)
+    Rating.create(
+      item:   item,
+      user:   self,
+      voter:  voter,
+      rating: rating
+    )
+    calculate_rating!
+  end
+
   private
 
   def default_role
     self.role ||= "user"
+  end
+
+  def calculate_rating!
+    rating_plus = Rating.where(user: self).where(rating: 1).count
+    rating_minus = Rating.where(user: self).where(rating: -1).count
+    rating = rating_plus - rating_minus
+
+    update_attributes(
+      rating: rating,
+      rating_plus: rating_plus,
+      rating_minus: rating_minus
+    )
   end
 end
