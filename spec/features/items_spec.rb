@@ -111,7 +111,7 @@ describe "items pages with", type: :feature do
 
     it "is check item edit page another user" do
       visit edit_item_path(@another_user_item)
-      expect(page).to have_content("Поиск по товарам, брэндам и продуктам")
+      expect(page).to have_content("Быстрый поиск услуг, товаров, магазинов")
     end
   end
 

@@ -1,50 +1,93 @@
-<div class="row">
-  <div class="col-lg-12">
-    <h2>Поиск по товарам, брэндам и продуктам</h2>
-  </div>
-  <%= form_tag(controller: 'search', action: 'create', method: 'post') do %>
-    <div class="col-lg-10">
-      <%= text_field_tag('search[query]', nil, class: 'form-control') %>
-    </div>
-    <div class="col-lg-2">
-      <%= collection_select(:search, :category, @categories, :id, :name, { prompt: "Везде" }, { class: 'form-control' }) %>
-    </div>
-    <div class="col-lg-12 text-center form-group">
-      <%= submit_tag('Искать', class: "btn btn-success") %>
-    </div>
-  <% end %>
-</div>
-
-<div class="row">
-  <div class="col-lg-8">
-    <div class="col-m-12 block">
-      <h3>Категории и подкатегории</h3>
-      <% @categories.each do |category| %>
-        <div class="col-sm-4">
-          <h4><%= link_to category.name, category_path(city: "all", category: category) %></h4>
-          <p>
-            <% category.subcategories.each do |subcat| %>
-              <%= link_to subcat.name, subcategory_path(city: "all", category: category, subcategory: subcat) %>
-            <% end %>
-          </p>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-m-12 block">
-      <h3>Города</h3>
-      <p>
-        <% @cities.each do |city| %>
-          <%= link_to city.name, city_path(city: city) %>
+<div class="container">
+  <div class="jumbotron home-search" style="">
+    <div class="row">
+      <div class="col-sm-12">
+        <br />
+        <p class="main_description">Быстрый поиск услуг, товаров, магазинов и частных объявлений в одном месте</p>
+        <br /><br />
+        <%= form_tag(controller: 'search', action: 'create', method: 'post') do %>
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2" style="text-align: center">
+              <div class="row">
+                <div class="col-sm-12" style="text-align: center">
+                  <div class="input-group">
+                    <span class="input-group-addon input-group-addon-text">Find me a</span>
+                    <%= text_field_tag("search[query]", nil,
+                                       placeholder: "e.g. BMW, 2 bed flat, sofa ",
+                                       class: 'form-control') %>
+                    <div class=" input-group-addon hidden-xs">
+                        <%= collection_select(:search, :category, @categories, :id, :name,
+                                              { prompt: "Все категории" },
+                                              { class: "form-control" }) %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+          <div class="row">
+            <div class="col-sm-12" style="text-align: center">
+              <%= submit_tag("Искать", class: "btn btn-primary search-btn") %>
+            </div>
+          </div>
         <% end %>
-      </p>
+      </div>
     </div>
   </div>
-  <div class="col-lg-4">
-    <h3>Последние объявления</h3>
-    <ul class="list-group">
-      <% @items.each do |item| %>
-        <li class="list-group-item"><%= link_to item.title, item %></li>
-      <% end %>
-    </ul>
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <div class="row directory">
+        <div class="col-sm-12">
+          <h2><span>Категории</span></h2>
+        </div>
+      </div>
+      <div class="row directory">
+        <div class="col-xs-12">
+          <% @categories.each do |category| %>
+            <div class="directory-block col-sm-4 col-xs-6">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h4><%= link_to category.name, category_path(city: "all", category: category) %></h4>
+                  <p>
+                    <% category.subcategories.each do |subcat| %>
+                      <%= link_to subcat.name, subcategory_path(city: "all", category: category, subcategory: subcat) %>
+                    <% end %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row directory hidden-xs">
+        <div class="col-sm-12">
+          <h2><span>Города</span></h2>
+            <p>
+              <% @cities.each do |city| %>
+                <%= link_to city.name, city_path(city: city) %>
+              <% end %>
+            </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-12 col-lg-11 pull-right">
+          <br class="hidden-sm hidden-xs"/>
+          <br class="hidden-sm hidden-xs"/>
+          <br class="hidden-sm hidden-xs"/>
+          <div class="panel panel-default">
+            <div class="panel-heading">Последние объявления</div>
+            <ul class="list-group">
+              <% @items.each do |item| %>
+                <li class="list-group-item"><%= link_to item.title, item %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -7,6 +7,7 @@ describe "users in admin", type: :feature do
   end
   it "check dashboard as unauthorization user" do
     visit admin_users_path
-    expect(page).to have_content "Log in"
+    expect(page).to have_content "Войти"
+    expect(page).to have_content "Заригестрироваться"
   end
 end

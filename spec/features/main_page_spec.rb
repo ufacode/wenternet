@@ -5,6 +5,5 @@ describe "search form on main page", type: :feature do
     visit "/"
     expect(page).to have_button "Искать"
     expect(page).to have_selector "input[name='search[query]']"
-    expect(page).to have_selector "div.block"
   end
 end
