@@ -16,7 +16,7 @@
   <div class="col-lg-4">
     <h4>Поданные объявления:</h4>
     <% @user.items.each do |item| %>
-      <%= link_to item.title, item_path %>
+      <%= link_to item.title, item_path(item) %>
     <% end %>
   </div>
 </div>

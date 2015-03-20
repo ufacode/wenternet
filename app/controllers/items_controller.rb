@@ -8,7 +8,11 @@ class ItemsController < ApplicationController
     @items = Item.includes(category: :subcategories).includes(:city).pages(params[:page]).all
   end
 
-  def show; end
+  def show
+    @categories  = Category.all
+    # TODO: Refactor this
+    @recent_items = Item.all.newest.published.limit(5)
+  end
 
   def new
     @item = Item.new
