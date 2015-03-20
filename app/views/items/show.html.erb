@@ -1,65 +1,200 @@
 <p id="notice"><%= notice %></p>
+<div class="jumbotron home-tron-search well ">
+  <div class="container">
+    <div class="row">
 
-<% if can? :vote, @item %>
-  <a class="plus-rating" href="#" data-url=<%= plus_rating_item_path(@item) %>>+</a> <br/>
-  <a class="minus-rating" href="#" data-url=<%= minus_rating_item_path(@item) %>>-</a>
-<% end %>
+      <div class="col-sm-12">
+        <div class="home-tron-search-inner">
+          <div class="row">
+            <div class="col-sm-8 col-xs-9" style="text-align: center">
+              <div class="row">
+                <div class="col-sm-12 col-sm-offset-1">
+                  <div class="input-group">
+                    <span class="input-group-addon input-group-addon-text">Нужно найти</span>
+                    <%= text_field_tag("search[query]", nil,
+                                       placeholder: "e.g. BMW, 2 bed flat, sofa ",
+                                       class: 'form-control') %>
+                    <div class=" input-group-addon hidden-xs">
+                      <%= collection_select(:search, :category, @categories, :id, :name,
+                                            { prompt: "Все категории" },
+                                            { class: "form-control" }) %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 col-xs-3" style="text-align: center">
+              <div class="row">
+                <div class="col-sm-11 pull-right">
+                  <button class="btn btn-primary search-btn"><i class="icon-search"></i>Поиск</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @item.title %>
-</p>
+<div class="container" id="listings-page">
+  <div class="row">
+    <div class="col-sm-12 listing-wrapper listings-top listings-bottom">
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col-sm-7">
+          <ol class="breadcrumb">
+            <li>
+              <%= link_to @item.city.name, city_path(city: @item.city) %>
+            </li>
+            <li>
+              <%= link_to @item.category.name, category_path(city: @item.city, category: @item.category) %>
+            </li>
+            <li>
+              <%= link_to @item.subcategory.name, subcategory_path(
+                                                      city: @item.city,
+                                                      category: @item.category,
+                                                      subcategory: @item.subcategory) %>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-7">
+          <h1><%= @item.title %></h1>
+        </div>
+        <div class="col-sm-5">
+          <p class="price"><%= @item.price %></p>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-sm-7">
+          <h3>Детали</h3>
+          <div class="row">
+            <div class="col-xs-6">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th>Автор</th>
+                    <td><%= link_to @item.user.name, profile_path(@item.user) %></td>
+                  </tr>
+                  <tr>
+                    <th>Телефон</th>
+                    <td><%= @item.phone %></td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td><%= @item.email %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-xs-6">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th>Размещено</th>
+                    <td><%= @item.created_at.strftime("%d %B %Y")%></td>
+                  </tr>
+                  <tr>
+                    <th>Город</th>
+                    <td><%= link_to @item.city.name, city_path(city: @item.city) %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-xs-12">
+              <h3>Описание</h3>
+              <p><%= @item.content %></p>
+              <p>
+                <span class="classified_links ">
+                  <% if can? :edit, @item %>
+                    <a href="#" class="link-info">Редактировать объявление</a> |
+                  <% end %>
+                  <% if can? :vote, @item %>
+                    <a class="plus-rating link-info" href="#" data-url=<%= plus_rating_item_path(@item) %>>+</a> |
+                    <a class="minus-rating link-info" href="#" data-url=<%= minus_rating_item_path(@item) %>>-</a> |
+                    <a class="minus-rating link-info" href="#" data-url=<%= minus_rating_item_path(@item) %>>Добавить в избранное</a>
+                  <% end %>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5 center zoom-gallery">
+          <div class="row">
+            <div class="center">
+              <div class="col-sm-12">
+                <div class="gallery-preview">
+                  <% @item.images.each do |img| %>
+                    <%= link_to image_tag(img.attachment.preview.url), img.attachment.url, class: "thumbnail" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="col-sm-12 listings">
+        <br/>
+        <div class="row">
+          <div class="panel panel-default recent-listings hidden-xs">
+            <div class="panel-heading">
+              Последние объявления в разделе "<%= @item.category.name %>"
+            </div>
+            <div class="panel-body">
+              <% @recent_items.each do |item| %>
+                <div class="row listing-row">
+                  <div class="col-sm-2">
+                    <% unless item.images.first.nil? %>
+                      <%= link_to image_tag(item.images.first.attachment.preview.url), item_path(item), class: "thumbnail" %>
+                    <% end %>
+                  </div>
+                  <div class="col-sm-10">
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <h3><%= link_to item.title, item_path(item) %></h3>
+                      </div>
+                      <div class="col-sm-3">
+                        <h3 class="price-text"><strong><%= item.price %></strong></h3>
+                      </div>
+                    </div>
 
-<p>
-  <strong>Price:</strong>
-  <%= @item.price %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @item.content %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @item.category.name %>
-</p>
-
-<p>
-  <strong>Subcategory:</strong>
-  <%= @item.subcategory.name %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @item.city.name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @item.user.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @item.email %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @item.phone %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @item.state.capitalize %>
-</p>
-
-<% @item.images.each do |img| %>
-  <%= link_to image_tag(img.attachment.preview.url), img.attachment.url %>
-<% end %>
-
-<% if can? :edit, @item %>
-  <%= link_to 'Edit', edit_item_path(@item) %> |
-<% end %>
-<%= link_to 'Back', items_path %>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <p class="muted">Город <%= item.city.name %></strong></p>
+                        <p class="muted">Размещено <%= item.created_at.strftime("%d %B %Y")%>
+                          в разделе <%= link_to item.subcategory.name, subcategory_path(
+                                                                   city: item.city,
+                                                                   category:item.category,
+                                                                   subcategory: item.subcategory) %></p><br />
+                        <p><%= item.content %></p>
+                        <br/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-10">
+                        <p>
+                          <span class="classified_links">
+                            <%= link_to "Посмотреть полностью", item_path(item), class: "link-info underline" %> |
+                            <%= link_to "Добавить в избарнное", "#", class: "link-info underline" %>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

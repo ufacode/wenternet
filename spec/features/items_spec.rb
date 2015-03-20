@@ -59,8 +59,7 @@ describe "items pages with", type: :feature do
       item = create(:item)
       visit item_path(item)
       expect(page).to have_content("#{item.title}")
-      expect(page).to have_link("Back")
-      expect(page).not_to have_link("Edit")
+      expect(page).not_to have_link("Редактировать объявление")
       expect(page).not_to have_link("+")
       expect(page).not_to have_link("-")
     end
@@ -87,8 +86,7 @@ describe "items pages with", type: :feature do
     it "is check item show page" do
       visit item_path(@user_item)
       expect(page).to have_content("#{@user_item.title}")
-      expect(page).to have_link("Back")
-      expect(page).to have_link("Edit")
+      expect(page).to have_link("Редактировать объявление")
       expect(page).not_to have_link("+")
       expect(page).not_to have_link("-")
     end
@@ -96,8 +94,7 @@ describe "items pages with", type: :feature do
     it "is check item show page another user" do
       visit item_path(@another_user_item)
       expect(page).to have_content("#{@another_user_item.title}")
-      expect(page).to have_link("Back")
-      expect(page).not_to have_link("Edit")
+      expect(page).not_to have_link("Редактировать объявление")
       expect(page).to have_link("+")
       expect(page).to have_link("-")
     end
@@ -142,8 +139,7 @@ describe "items pages with", type: :feature do
     it "is check item show page another user" do
       visit item_path(@user_item)
       expect(page).to have_content("#{@user_item.title}")
-      expect(page).to have_link("Back")
-      expect(page).to have_link("Edit")
+      expect(page).to have_link("Редактировать объявление")
       expect(page).to have_link("+")
       expect(page).to have_link("-")
     end
