@@ -1,17 +1,15 @@
-select {
-  &#search_category {
-    background: url(asset-path("theme/dropdown_arrow.png")) no-repeat 95% center transparent;
-    background-size: 10px 5px;
-    border: none;
-    box-shadow: none;
-    font-weight: 400;
-    height: auto;
-    padding: 10px 22px 10px 4px;
-    width: 160px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
+select.form-control.search_options {
+  background: url(asset-path("theme/dropdown_arrow.png")) no-repeat 95% center transparent;
+  background-size: 10px 5px;
+  border: none;
+  box-shadow: none;
+  font-weight: 400;
+  height: auto;
+  padding: 10px 22px 10px 4px;
+  width: 160px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .account-sidebar {
@@ -26,5 +24,21 @@ select {
   a {
     float: left;
     width: 50%;
+  }
+}
+
+.search-result {
+
+  #search_query {
+    height: 30px;
+  }
+
+  .form-control.search_options {
+    padding: 0 22px 0 4px;
+  }
+
+  .btn.search-btn {
+    padding: 5px;
+    width: 138px;
   }
 }

@@ -5,14 +5,12 @@ describe "search page", type: :feature do
 
   it "check search form" do
     expect(page).to have_selector "input[name='search[query]']"
-    expect(page).to have_button "Search"
-    expect(page).not_to have_selector "table"
+    expect(page).to have_button "Поиск"
   end
 
   it "check search working" do
-    click_button "Search"
-    expect(page).to have_selector "table"
-    expect(page).to have_content "Title"
-    expect(page).to have_content "Price"
+    click_button "Поиск"
+    expect(page).to have_selector "input[name='search[query]']"
+    expect(page).to have_content "По запросу найдено"
   end
 end

@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   def show
     @categories  = Category.all
     # TODO: Refactor this
-    @recent_items = Item.all.newest.published.limit(5)
+    @recent_items = Item.where(category: @item.category).newest.published.limit(5)
   end
 
   def new
