@@ -1,36 +1,37 @@
 <p id="notice"><%= notice %></p>
-<div class="jumbotron home-tron-search well ">
+<div class="jumbotron home-tron-search well">
   <div class="container">
     <div class="row">
-
       <div class="col-sm-12">
         <div class="home-tron-search-inner">
-          <div class="row">
-            <div class="col-sm-8 col-xs-9" style="text-align: center">
-              <div class="row">
-                <div class="col-sm-12 col-sm-offset-1">
-                  <div class="input-group">
-                    <span class="input-group-addon input-group-addon-text">Нужно найти</span>
-                    <%= text_field_tag("search[query]", nil,
-                                       placeholder: "e.g. BMW, 2 bed flat, sofa ",
-                                       class: 'form-control') %>
-                    <div class=" input-group-addon hidden-xs">
-                      <%= collection_select(:search, :category, @categories, :id, :name,
-                                            { prompt: "Все категории" },
-                                            { class: "form-control" }) %>
+          <%= form_tag(controller: 'search', action: 'create', method: 'post') do %>
+            <div class="row">
+              <div class="col-sm-8 col-xs-9" style="text-align: center">
+                <div class="row">
+                  <div class="col-sm-12 col-sm-offset-1">
+                    <div class="input-group">
+                      <span class="input-group-addon input-group-addon-text">Нужно найти</span>
+                      <%= text_field_tag("search[query]", nil,
+                                         placeholder: "e.g. BMW, 2 bed flat, sofa ",
+                                         class: 'form-control') %>
+                      <div class=" input-group-addon hidden-xs">
+                        <%= collection_select(:search, :category, @categories, :id, :name,
+                                              { prompt: "Все категории" },
+                                              { class: "form-control search_options" }) %>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-4 col-xs-3" style="text-align: center">
-              <div class="row">
-                <div class="col-sm-11 pull-right">
-                  <button class="btn btn-primary search-btn"><i class="icon-search"></i>Поиск</button>
+              <div class="col-sm-4 col-xs-3" style="text-align: center">
+                <div class="row">
+                  <div class="col-sm-11 pull-right">
+                    <%= submit_tag("Поиск", class: "btn btn-primary search-btn") %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -170,7 +171,8 @@
                           в разделе <%= link_to item.subcategory.name, subcategory_path(
                                                                    city: item.city,
                                                                    category:item.category,
-                                                                   subcategory: item.subcategory) %></p><br />
+                                                                   subcategory: item.subcategory) %></p>
+                        <br/>
                         <p><%= item.content %></p>
                         <br/>
                       </div>

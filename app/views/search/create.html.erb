@@ -1,25 +1,48 @@
-<%= render 'search_form' %>
-
-<table>
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>Price</th>
-    <th>Content</th>
-    <th>Email</th>
-    <th>Phone</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @items.each do |item| %>
-    <tr>
-      <td><%= item.title %></td>
-      <td><%= item.price %></td>
-      <td><%= item.content %></td>
-      <td><%= item.email %></td>
-      <td><%= item.phone %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= render "search/search_form" %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 listings">
+      <div class="row listing-row">
+        <div class="pull-left">
+          <span>По запросу найдено <%= @items.count %> объявлений</span>
+        </div>
+        <div class="pull-right">
+          <span style="">Sort by:&nbsp;&nbsp;&nbsp;</span>
+          <a href="#"  data-toggle="tooltip" data-placement="top" title="Sort from newest to oldest"> Date <i class="fa fa-chevron-up"></i></a>
+          <a href="#" data-toggle="tooltip" data-placement="top" title="Sort from lowest price to highest price"> Price <i class="fa fa-chevron-down"></i></a>
+        </div>
+      </div>
+      <% @items.each do |item| %>
+        <div class="row listing-row">
+          <div class="col-sm-2">
+            <% unless item.images.first.nil? %>
+              <%= link_to image_tag(item.images.first.attachment.preview.url), item_path(item), class: "thumbnail" %>
+            <% end %>
+          </div>
+          <div class="col-sm-10">
+            <h3>
+              <%= link_to(item_path(item)) do %>
+                <%= item.title %> - <strong><%= item.price %></strong>
+              <% end %>
+            </h3>
+            <p class="muted">Город <strong><%= item.city.name %></strong></p>
+            <p class="muted">Размещено <%= item.created_at.strftime("%d %B %Y")%>
+              в разделе <%= link_to item.subcategory.name, subcategory_path(
+                                                             city: item.city,
+                                                             category:item.category,
+                                                             subcategory: item.subcategory) %></p>
+            <br/>
+            <p><%= item.content %></p>
+            <br/>
+            <p>
+                          <span class="classified_links">
+                            <%= link_to "Посмотреть полностью", item_path(item), class: "link-info underline" %> |
+                            <%= link_to "Добавить в избарнное", "#", class: "link-info underline" %>
+                          </span>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
