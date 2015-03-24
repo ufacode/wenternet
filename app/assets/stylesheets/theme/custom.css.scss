@@ -42,3 +42,41 @@ select.form-control.search_options {
     width: 138px;
   }
 }
+
+// pagination
+.pagination a, .pagination span.current, .pagination span.gap {
+  float: left;
+  padding: 0 15px;
+  line-height: 38px;
+  text-decoration: none;
+  background-color: white;
+  border-left-width: 0;
+}
+
+.pagination {
+  .first{
+    padding : 0;
+    float: none;
+    border: none;
+  }
+  .prev {
+    padding : 0;
+    float: none;
+    border: none;
+  }
+  .page{
+    padding : 0;
+    float: none;
+    border: none;
+  }
+  .next{
+    padding : 0;
+    float: none;
+    border: none;
+  }
+  .last{
+    padding : 0;
+    float: none;
+    border: none;
+  }
+}

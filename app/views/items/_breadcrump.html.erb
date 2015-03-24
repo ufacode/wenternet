@@ -1,0 +1,27 @@
+<br/>
+<div class="row">
+  <div class="col-sm-12">
+    <ol class="breadcrumb">
+      <li>
+        <% if @city == "all" %>
+          <%= link_to "Все города", city_path %>
+        <% else %>
+          <%= link_to @city.name, city_path(city: @city) %>
+        <% end %>
+      </li>
+      <% unless @category.nil? %>
+        <li>
+          <%= link_to @category.name, category_path(city: @city, category: @category) %>
+        </li>
+      <% end %>
+      <% unless @subcategory.nil? %>
+        <li>
+          <%= link_to @subcategory.name, subcategory_path(
+                                           city: @city,
+                                           category: @category,
+                                           subcategory: @subcategory) %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

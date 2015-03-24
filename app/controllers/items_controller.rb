@@ -100,7 +100,7 @@ class ItemsController < ApplicationController
   end
 
   def all_cities?
-    params[:city].downcase == "all"
+    @city = "all" if params[:city].downcase == "all"
   end
 
   def rate!(rating)

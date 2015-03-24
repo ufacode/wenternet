@@ -25,15 +25,15 @@ describe "items list", type: :feature do
 
   it "check items by category" do
     visit "/#{@city.uri}/#{@category.uri}"
-    expect(page).not_to have_content @category.name
+    expect(page).to have_content @category.name
     expect(page).to have_content @subcategory.name
     expect(page).to have_content @item.title
   end
 
   it "check items by subcategory" do
     visit "/#{@city.uri}/#{@category.uri}/#{@subcategory.uri}"
-    expect(page).not_to have_content @category.name
-    expect(page).not_to have_content @subcategory.name
+    expect(page).to have_content @category.name
+    expect(page).to have_content @subcategory.name
     expect(page).to have_content @item.title
   end
 
