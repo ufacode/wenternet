@@ -3,7 +3,7 @@ class ItemSearch < Searchlight::Search
   searches :query, :city, :category, :subcategory
 
   def search_query
-    search.where("title LIKE :query OR content LIKE :query", query: "%#{query}%")
+    search.where('title LIKE :query OR content LIKE :query', query: "%#{query}%")
   end
 
   def search_city

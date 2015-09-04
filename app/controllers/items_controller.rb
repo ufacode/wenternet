@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @categories  = Category.all
+    @categories = Category.all
     # TODO: Refactor this
     @recent_items = Item.where(category: @item.category).newest.published.limit(5)
   end
@@ -25,11 +25,11 @@ class ItemsController < ApplicationController
     @item.user = current_user
     if @item.save
       unless params[:images].nil?
-        params[:images]["attachment"].each do |attch|
+        params[:images]['attachment'].each do |attch|
           @image = @item.images.create!(attachment: attch)
         end
       end
-      redirect_to @item, notice: "Item was successfully created."
+      redirect_to @item, notice: 'Item was successfully created.'
     else
       render :new
     end
@@ -39,11 +39,11 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       unless params[:images].nil?
         @item.images.delete_all
-        params[:images]["attachment"].each do |attch|
+        params[:images]['attachment'].each do |attch|
           @image = @item.images.create!(attachment: attch)
         end
       end
-      redirect_to @item, notice: "Item was successfully updated."
+      redirect_to @item, notice: 'Item was successfully updated.'
     else
       render :edit
     end
@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to items_url, notice: "Item was successfully destroyed."
+    redirect_to items_url, notice: 'Item was successfully destroyed.'
   end
 
   def city
@@ -100,15 +100,15 @@ class ItemsController < ApplicationController
   end
 
   def all_cities?
-    @city = "all" if params[:city].downcase == "all"
+    @city = 'all' if params[:city].downcase == 'all'
   end
 
   def rate!(rating)
     if Rating.dublicate?(@item, current_user)
-      @message = "You have already voted"
+      @message = 'You have already voted'
     else
       @item.user.rate!(@item, current_user, rating)
-      @message = "Your vote has been counted"
+      @message = 'Your vote has been counted'
     end
   end
 end

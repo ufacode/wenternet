@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 20150313085553) do
 
   create_table "items", force: :cascade do |t|
     t.string   "title",          limit: 255
-    t.decimal  "price",                        precision: 8, scale: 2
     t.text     "content",        limit: 65535
     t.string   "email",          limit: 255
     t.string   "phone",          limit: 255
@@ -51,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150313085553) do
     t.integer  "user_id",        limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "price",                        precision: 8, scale: 2
   end
 
   add_index "items", ["state"], name: "index_items_on_state", using: :btree

@@ -1,1 +1,1 @@
-json.partial! "rating"
+json.partial! 'rating'

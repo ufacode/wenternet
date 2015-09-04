@@ -7,10 +7,10 @@ class Ability
 
     user ||= User.new
 
-    if user.role == "admin"
+    if user.role == 'admin'
       can :manage, :all
       cannot :vote, Item, user_id: user.id
-    elsif user.role == "user"
+    elsif user.role == 'user'
       can :new, Item
       can :search, Item
       can :vote, Item

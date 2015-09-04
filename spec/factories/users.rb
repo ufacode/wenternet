@@ -4,10 +4,10 @@ FactoryGirl.define do
     email { Faker::Internet.safe_email }
     password { Faker::Internet.password }
     password_confirmation { password }
-    role "user"
+    role 'user'
 
     factory :admin do
-      role "admin"
+      role 'admin'
     end
   end
 end

@@ -17,7 +17,7 @@ class Item < ActiveRecord::Base
   validates :email,          presence: true
   validates :phone,          presence: true
 
-  scope :newest,         -> { order("created_at DESC") }
+  scope :newest,         -> { order('created_at DESC') }
   scope :published,      -> { where(state: :published) }
   scope :pages,       ->(p) { page(p).per(15) }
 

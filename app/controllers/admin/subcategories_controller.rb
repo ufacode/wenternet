@@ -20,7 +20,7 @@ class Admin::SubcategoriesController < Admin::ApplicationController
     @subcategory = Subcategory.new(subcategory_params)
 
     if @subcategory.save
-      redirect_to admin_subcategories_path, notice: "Subcategory was successfully created."
+      redirect_to admin_subcategories_path, notice: 'Subcategory was successfully created.'
     else
       render :new
     end
@@ -29,7 +29,7 @@ class Admin::SubcategoriesController < Admin::ApplicationController
   # PATCH/PUT /subcategories/1
   def update
     if @subcategory.update(subcategory_params)
-      redirect_to admin_subcategories_path, notice: "Subcategory was successfully updated."
+      redirect_to admin_subcategories_path, notice: 'Subcategory was successfully updated.'
     else
       render :edit
     end
@@ -38,7 +38,7 @@ class Admin::SubcategoriesController < Admin::ApplicationController
   # DELETE /subcategories/1
   def destroy
     @subcategory.destroy
-    redirect_to admin_subcategories_url, notice: "Subcategory was successfully destroyed."
+    redirect_to admin_subcategories_url, notice: 'Subcategory was successfully destroyed.'
   end
 
   private
