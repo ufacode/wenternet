@@ -1,35 +1,37 @@
 <div class="container">
-  <nav class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-      <a href="/" class="navbar-brand ">
-        <span class="logo"><strong>WENTERNET</strong><br />
-          <small >number one classifieds site</small></span>
-      </a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right visible-xs">
-        <li class="active"><a href="/">Home</a></li>
-        <% if user_signed_in? %>
-          <li><%= link_to "My account", profile_path(current_user) %></li>
-          <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
-          <li><%= link_to 'Post an ad', new_item_path, class: "btn btn-warning post-ad-btn" %></li>
-        <% else %>
-          <li><%= link_to "Login", new_user_session_path %></li>
-          <li><%= link_to "Register", new_user_registration_path %></li>
-        <% end %>
-      </ul>
-      <div class="row hidden-xs">
-        <div class="pull-right">
+  <div class="row">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand ">
+          <span class="logo"><strong>WENTERNET</strong><br />
+            <small >number one classifieds site</small></span>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right visible-xs">
+          <li class="active"><a href="/">Home</a></li>
           <% if user_signed_in? %>
-            <%= link_to "Профиль", profile_path(current_user) %> |
-            <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
-            <%= link_to "Подать объявление", new_item_path, class: "btn btn-warning post-ad-btn" %>
+            <li><%= link_to "My account", profile_path(current_user) %></li>
+            <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+            <li><%= link_to 'Post an ad', new_item_path, class: "btn btn-warning post-ad-btn" %></li>
           <% else %>
-            <%= link_to "Войти", new_user_session_path %> |
-            <%= link_to "Заригестрироваться", new_user_registration_path %>
+            <li><%= link_to "Login", new_user_session_path %></li>
+            <li><%= link_to "Register", new_user_registration_path %></li>
           <% end %>
+        </ul>
+        <div class="hidden-xs">
+          <div class="pull-right">
+            <% if user_signed_in? %>
+              <%= link_to "Профиль", profile_path(current_user) %> |
+              <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+              <%= link_to "Подать объявление", new_item_path, class: "btn btn-warning post-ad-btn" %>
+            <% else %>
+              <%= link_to "Войти", new_user_session_path %> |
+              <%= link_to "Заригестрироваться", new_user_registration_path %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </div>
