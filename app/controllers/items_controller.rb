@@ -85,9 +85,10 @@ class ItemsController < ApplicationController
 
   def set_params
     @categories  = Category.includes(:subcategories)
-    @city        = City.where(uri: params[:city]).first                   if params[:city]
-    @category    = Category.where(uri: params[:category]).first           if params[:category]
-    @subcategory = Subcategory.where(uri: params[:subcategory]).first     if params[:subcategory]
+    @city        = City.where(uri: params[:city]).first if params[:city]
+    @category    = Category.where(uri: params[:category]).first if params[:category]
+    @subcategory = Subcategory.where(category: @category,
+                                     uri: params[:subcategory]).first if params[:subcategory]
   end
 
   def items_city!
