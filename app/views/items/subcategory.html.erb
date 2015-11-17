@@ -2,9 +2,24 @@
 
 <div class="container">
   <%= render "breadcrump" %>
-
   <div class="row">
-    <div class="col-sm-12 pull-right listings">
+    <div class="col-sm-3 hidden-xs">
+      <div class="sidebar">
+        <div class="panel panel-default">
+          <div class="panel-heading">Список подкатегорий</div>
+          <ul class="list-group">
+            <% @category.subcategories.each do |subcategory| %>
+              <li class="list-group-item <%= 'selected' if subcategory == @subcategory  %>">
+                <%= link_to subcategory.name, subcategory_path(city: @city,
+                                                               category: @category,
+                                                               subcategory: subcategory) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 pull-right listings">
       <%= render "item_list" %>
     </div>
   </div>
