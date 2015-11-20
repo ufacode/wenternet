@@ -101,9 +101,9 @@ describe 'items pages with', type: :feature do
 
     it 'is check item edit page' do
       visit edit_item_path(@user_item)
-      expect(page).to have_content('Editing Item')
-      expect(page).to have_link('Back')
-      expect(page).to have_link('Show')
+      expect(page).to have_content('Детали объявления')
+      expect(page).to have_selector("input[value='#{@user_item.title}']")
+      expect(page).to have_selector("input[value='Update Item']")
     end
 
     it 'is check item edit page another user' do
@@ -146,9 +146,8 @@ describe 'items pages with', type: :feature do
 
     it 'is check item edit page' do
       visit edit_item_path(@user_item)
-      expect(page).to have_content('Editing Item')
-      expect(page).to have_link('Back')
-      expect(page).to have_link('Show')
+      expect(page).to have_content('Детали объявления')
+      expect(page).to have_selector("input[value='Update Item']")
     end
   end
 end

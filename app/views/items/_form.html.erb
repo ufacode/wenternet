@@ -1,45 +1,122 @@
-<%= form_for(@item, html: { multipart: true }) do |f| %>
-  <%= form_errors @item %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :category_id %><br>
-    <%= collection_select(:item, :category_id, Category.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :subcategory_id %><br>
-    <%= collection_select(:item, :subcategory_id, Subcategory.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :city_id %><br>
-    <%= collection_select(:item, :city_id, City.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.file_field :images, multiple: true, name: 'images[attachment][]' %>
-  </div>
-  <div class="field">
-    <%= f.check_box :state, {}, 'published', 'drafted' %> Publish
-  </div>
-  <div class="actions">
-    <%= f.submit 'Save' %>
-  </div>
-<% end %>
+<div class="form-vertical">
+  <%= form_for(@item, html: { multipart: true }) do |f| %>
+    <%= form_errors @item %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Выберите категорию
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-3 inline-label">
+                  <%= f.label :category_id %>
+                </div>
+                <div class="col-sm-9">
+                  <%= collection_select(:item, :category_id, Category.all, :id, :name, {:include_blank => 'Please Select'}, class: "form-control") %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-3 inline-label">
+                  <%= f.label :subcategory_id %>
+                </div>
+                <div class="col-sm-9">
+                  <%= collection_select(:item, :subcategory_id, Subcategory.all, :id, :name, {:include_blank => 'Please Select'}, class: "form-control") %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Детали объявления
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-12">
+              <%= f.label :title %>
+              <%= f.text_field :title, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-12">
+              <%= f.label :price %>
+              <%= f.text_field :price, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-12">
+              <%= f.label :content %>
+              <%= f.text_area :content, class: "form-control expand" %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-12">
+              <%= f.label :city_id %><br>
+              <%= collection_select(:item, :city_id, City.all, :id, :name, {:include_blank => 'Please Select'}, class: "form-control") %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="item_images">Images</label>
+          <%= f.file_field :images, multiple: true, name: 'images[attachment][]' %>
+        </div>
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :state, {}, 'published', 'drafted' %> Publish
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Контактная информация
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-2 inline-label">
+                  <%= f.label :email %>
+                </div>
+                <div class="col-sm-10">
+                  <%= f.text_field :email, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-2 inline-label">
+                  <%= f.label :phone %>
+                </div>
+                <div class="col-sm-10">
+                  <%= f.text_field :phone, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
