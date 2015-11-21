@@ -1,0 +1,75 @@
+select.form-control.search_options {
+  background: url(asset-path("theme/dropdown_arrow.png")) no-repeat 95% center transparent;
+  background-size: 10px 5px;
+  border: none;
+  box-shadow: none;
+  font-weight: 400;
+  height: auto;
+  padding: 10px 22px 10px 4px;
+  width: 160px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.account-sidebar {
+  .col-sm-3 {
+    text-align: center;
+  }
+}
+
+.gallery-preview {
+  overflow: hidden;
+  width: 100%;
+  a {
+    float: left;
+    width: 50%;
+  }
+}
+
+.search-result {
+  #search_query {
+    height: 30px;
+  }
+  .form-control.search_options {
+    padding: 0 22px 0 4px;
+  }
+  .btn.search-btn {
+    padding: 5px;
+    width: 138px;
+  }
+}
+
+// pagination
+.pagination a, .pagination span.current, .pagination span.gap {
+  float: left;
+  padding: 0 15px;
+  line-height: 38px;
+  text-decoration: none;
+  background-color: white;
+  border-left-width: 0;
+}
+
+.pagination {
+  .first, .prev, .page, .next, .last {
+    padding: 0;
+    float: none;
+    border: none;
+  }
+}
+
+.alert.alert-notice {
+  border-color: black;
+  background: black;
+  color: white;
+}
+
+.alert.alert-alert {
+  border-color: #b30028;
+  background: #ff0039;
+  color: white;
+}
+
+.sidebar ul.list-group .selected {
+  background: #e6e6e6;
+}

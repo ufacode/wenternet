@@ -1,0 +1,11 @@
+//= require_directory ./theme/
+//= require_self
+
+$nprogress-color: #b0454c;
+
+@import "nprogress";
+@import "nprogress-bootstrap";
+
+#nprogress .bar {
+  height: 4px !important;
+}
