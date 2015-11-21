@@ -9,8 +9,9 @@ describe 'profiles pages', type: :feature do
   it 'is check user info in show page' do
     @user = create(:user)
     visit profile_path(id: @user.id)
-    expect(page).to have_content "#{@user.name}"
-    expect(page).to have_content "#{@user.email}"
+    expect(page).to have_content 'Данные пользователя'
+    expect(page).to have_selector("input[value='#{@user.name}']")
+    expect(page).to have_selector("input[value='#{@user.email}']")
   end
 
   it 'is check user form in edit page' do
