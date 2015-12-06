@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -29,8 +29,9 @@ gem 'airbrake' # errbit notifications
 gem 'bootstrap-sass', '~> 3.3' # bootstrap
 gem 'autoprefixer-rails' # css prefixer
 gem 'nprogress-rails' # turbolinks progressbar
-gem 'searchlight'
+gem 'searchlight', '~> 3.1.1'
 gem 'config'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug'
@@ -45,6 +46,15 @@ group :development do
   gem 'quiet_assets'
   gem 'bullet'
   gem 'brakeman', require: false
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
+end
+
+group :production, :development do
+  gem 'puma'
 end
 
 group :production do
